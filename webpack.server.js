@@ -8,7 +8,7 @@ module.exports = {
     externals: [nodeExternals()],
     output: {
         path: path.resolve('build'),
-        filename: 'index.js',
+        filename: 'server.js',
     },
     module: {
         rules: [

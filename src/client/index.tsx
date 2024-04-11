@@ -1,11 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
+import './styles/global.css'
 
 import App from '@client/App';
+import { BrowserRouter } from 'react-router-dom';
+import { hydrateRoot } from 'react-dom/client';
 
-ReactDOM.hydrate(
+hydrateRoot(
+  document.getElementById('root') as Element,
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 );

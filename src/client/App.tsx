@@ -1,10 +1,27 @@
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 
-import React from 'react';
+import RootLayout from "./layouts/RootLayout";
 
-import Home from '@pages/Home';
+import Dashboard from "@pages/Dashboard";
+
+import { TooltipProvider } from "@client/shadcn/components/ui/tooltip";
+import { SQLiteDBProvider } from "./hooks/useDB";
 
 function App() {
-  return <Home name="Ravi Teja"/>;
+  return (
+    <>
+      <SQLiteDBProvider>
+        <TooltipProvider>
+          <Routes>
+            <Route path="/" element={<RootLayout />}>
+              <Route index element={<Dashboard />} />
+            </Route>
+          </Routes>
+        </TooltipProvider>
+      </SQLiteDBProvider>
+    </>
+  );
 }
 
 export default App;

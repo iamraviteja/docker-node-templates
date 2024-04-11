@@ -22,6 +22,7 @@
           "@pages": ["src/client/pages/index.ts"],
           "@pages/*": ["src/client/pages/*"],
           "@client/*": ["src/client/*"],
+          "@/*": ["./*"]
         }
       },
       "exclude": ["node_modules"],
