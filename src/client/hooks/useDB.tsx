@@ -9,7 +9,6 @@ type Action = {
   type: "exec_query" | "init_db_success" | "init_db_error";
   payload: any;
 };
-type Dispatch = (action: Action) => void;
 type State = { db: any; dbError: any; res: any };
 type SQLiteDBProviderProps = { children: React.ReactNode };
 
@@ -24,7 +23,11 @@ function dbReducer(state: State, action: Action) {
     case INIT_DB_ERROR:
       return { db: null, dbError: action.payload, res: null };
     case EXEC_QUERY:
-      return state;
+      let res = null;
+      if(state.db){
+        res = state.db.exec(action.payload);
+      }
+      return {...state, res};
     default:
       throw new Error(`Unhandled action type ${action.type} in theme reducer!`);
   }
@@ -44,19 +47,7 @@ export const SQLiteDBProvider = ({ children }: SQLiteDBProviderProps) => {
               locateFile: (file) => `https://sql.js.org/dist/${file}`,
             });
             const db = new SQL.Database();
-            // Execute a single SQL string that contains multiple statements
-            let sqlstr = "CREATE TABLE hello (a int, b char); \
-            INSERT INTO hello VALUES (0, 'hello'); \
-            INSERT INTO hello VALUES (1, 'world');";
-            db.run(sqlstr); // Run the query without returning anything
-
-            // Prepare an sql statement
-            const stmt = db.prepare("SELECT * FROM hello WHERE a=:aval AND b=:bval");
-
-            // Bind values to the parameters and fetch the results of the query
-            const result = stmt.getAsObject({':aval' : 1, ':bval' : 'world'});
-            console.log(result); // Will print {a:1, b:'world'}
-            stmt.free();
+            
             dispatch({ type: INIT_DB_SUCCESS, payload: db });
           } catch (err) {
             dispatch({ type: INIT_DB_ERROR, payload: err });

@@ -1,21 +1,25 @@
 # React SSR
+
 Explain the following points
+
 - Why SSR is needed
 - Which use cases are best served by SSR
-- React 18 streaming APIs 
+- React 18 streaming APIs
 - Config steps
 
+# Project Architecture and Functional points
+
+- UI component library is shadcn
+- When deployed on web users can use sqlite in browser
+- When users run the project in their local they will be able to use different DB options
 
 # TODO : next steps (Main focus on UI)
-- Config: Include shadcn and tailwind configuration
-- Feature: Include routing to following pages
-    - Header
-    - Dashboard
-    - Details
-    - Details : side bar
-    - Details : main content
+
+- Create tutorial flow
+- Create error handling
 
 # Reference
+
 https://github.com/adrianhajdin/docker-course/tree/main
 
 Typescript esbuild SSR setup
