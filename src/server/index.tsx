@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/details", (req, res) => {
+app.get("/settings", (req, res) => {
   console.log(req.url);
   const app = ReactDOMServer.renderToString(
     <StaticRouter location={req.url}>

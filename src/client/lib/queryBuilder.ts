@@ -6,8 +6,8 @@ function createColumns(schema: any) {
 
 const createValueByType: any = {
   integer: (v: any) => `${parseInt(v)}`,
-  char: (v: any) => `'${v.replace('\'','_')}'`,
-  text: (v: any) => `'${v.replace('\'','_')}'`,
+  char: (v: any) => `'${v.replace("'", "_")}'`,
+  text: (v: any) => `'${v.replace("'", "_")}'`,
   float: (v: any) => `${parseFloat(v)}`,
 };
 
@@ -33,6 +33,7 @@ export function createTable(
 ) {
   let sqlstr = `DROP TABLE IF EXISTS ${tableName};\n`;
   sqlstr += `CREATE TABLE ${tableName} (${createColumns(schema)});`;
+  data = data.slice(0,10);
   data.forEach((el) => {
     sqlstr += `INSERT INTO ${tableName} VALUES (${createValues(el, schema)});`;
   });

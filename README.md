@@ -15,7 +15,9 @@ Explain the following points
 
 # TODO : next steps (Main focus on UI)
 
-- Create tutorial flow
+- Move settings to modal
+- Create tutorial flow and free flow
+- Use code mirror for editor
 - Create error handling
 
 # Reference
