@@ -15,13 +15,15 @@ import {
   TooltipTrigger,
 } from "@client/shadcn/components/ui/tooltip";
 import { Button } from "@client/shadcn/components/ui/button";
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
+  const navigate = useNavigate();
   return (
     <>
       <aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r">
         <div className="border-b p-2">
-          <Button variant="outline" size="icon" aria-label="Home">
+          <Button variant="outline" size="icon" aria-label="Home" onClick={() => navigate('/')}>
             <Triangle className="size-5 fill-foreground" />
           </Button>
         </div>
@@ -33,6 +35,7 @@ function Sidebar() {
                 size="icon"
                 className="rounded-lg bg-muted"
                 aria-label="Playground"
+                onClick={() => navigate('/')}
               >
                 <SquareTerminal className="size-5" />
               </Button>
@@ -93,6 +96,7 @@ function Sidebar() {
                 size="icon"
                 className="rounded-lg"
                 aria-label="Settings"
+                onClick={() => navigate('/settings')}
               >
                 <Settings2 className="size-5" />
               </Button>
