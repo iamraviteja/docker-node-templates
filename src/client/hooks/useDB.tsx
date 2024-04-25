@@ -44,7 +44,7 @@ export const SQLiteDBProvider = ({ children }: SQLiteDBProviderProps) => {
     (async () => {
         try {
             const SQL = await initSqlJs({
-              locateFile: (file) => `https://sql.js.org/dist/${file}`,
+              locateFile: (file) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.wasm`,
             });
             const db = new SQL.Database();
             
