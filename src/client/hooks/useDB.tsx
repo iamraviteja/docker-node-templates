@@ -1,33 +1,26 @@
 import * as React from "react";
 import initSqlJs from "sql.js";
 
-export const EXEC_QUERY = "exec_query";
 export const INIT_DB_SUCCESS = "init_db_success";
 export const INIT_DB_ERROR = "init_db_error";
 
 type Action = {
-  type: "exec_query" | "init_db_success" | "init_db_error";
+  type: "init_db_success" | "init_db_error";
   payload: any;
 };
-type State = { db: any; dbError: any; res: any };
+type State = { db: any; dbError: any };
 type SQLiteDBProviderProps = { children: React.ReactNode };
 
 const SQLiteDBContext = React.createContext<
-  { state: State; execQuery: (query:string)=> void } | undefined
+  { state: State } | undefined
 >(undefined);
 
-function dbReducer(state: State, action: Action) {
+function dbReducer(_: State, action: Action) {
   switch (action.type) {
     case INIT_DB_SUCCESS:
-      return { db: action.payload, dbError: null, res: null };
+      return { db: action.payload, dbError: null };
     case INIT_DB_ERROR:
-      return { db: null, dbError: action.payload, res: null };
-    case EXEC_QUERY:
-      let res = null;
-      if(state.db){
-        res = state.db.exec(action.payload);
-      }
-      return {...state, res};
+      return { db: null, dbError: action.payload };
     default:
       throw new Error(`Unhandled action type ${action.type} in theme reducer!`);
   }
@@ -37,14 +30,13 @@ export const SQLiteDBProvider = ({ children }: SQLiteDBProviderProps) => {
   const [state, dispatch] = React.useReducer(dbReducer, {
     db: null,
     dbError: null,
-    res: null,
   });
 
   React.useEffect(() => {
     (async () => {
         try {
             const SQL = await initSqlJs({
-              locateFile: (file) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.wasm`,
+              locateFile: (_) => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.wasm`,
             });
             const db = new SQL.Database();
             
@@ -55,7 +47,7 @@ export const SQLiteDBProvider = ({ children }: SQLiteDBProviderProps) => {
     })();
   }, []);
 
-  const value = { state, execQuery: (query: string) => dispatch({type: EXEC_QUERY, payload: query}) };
+  const value = { state };
   return (
     <SQLiteDBContext.Provider value={value}>
       {children}

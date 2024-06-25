@@ -15,9 +15,12 @@ Explain the following points
 
 # TODO : next steps (Main focus on UI)
 
-- Move settings to modal
-- Create tutorial flow and free flow
-- Use code mirror for editor
+- Add settings validation
+- Create tutorial flow 
+- Create free flow 
+    -   Save query
+    -   View results
+    -   Add intelisense
 - Create error handling
 
 # Reference
